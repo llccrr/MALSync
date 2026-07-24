@@ -13,6 +13,7 @@
         :progress-ep="item.progressEp"
         :progress-text="item.progressText"
       />
+      <BookmarksAiringChip :status="item.airingStatus" />
     </div>
   </div>
 </template>
@@ -23,6 +24,7 @@ import { bookmarkItem } from '../../minimalClass';
 import ImageLazy from '../image-lazy.vue';
 import MediaLink from '../media-link.vue';
 import MediaPill from '../media/media-pill.vue';
+import BookmarksAiringChip from './bookmarks-airing-chip.vue';
 
 defineProps({
   item: {

@@ -107,6 +107,7 @@ export class UserList extends ListAbstract {
         'num_episodes',
         'num_chapters',
         'num_volumes',
+        'status',
         useAltTitle ? 'alternative_titles' : '',
       ],
     }).then(json => {
@@ -145,7 +146,7 @@ export class UserList extends ListAbstract {
             image: el.node.main_picture?.medium ?? '',
             imageLarge: el.node.main_picture?.large || el.node.main_picture?.medium || '',
             tags: el.list_status.tags.length ? el.list_status.tags.join(',') : '',
-            airingState: el.anime_airing_status,
+            airingState: el.node.status,
           }),
         );
       } else {
@@ -170,7 +171,7 @@ export class UserList extends ListAbstract {
             image: el.node.main_picture?.medium ?? '',
             imageLarge: el.node.main_picture?.large || el.node.main_picture?.medium || '',
             tags: el.list_status.tags.length ? el.list_status.tags.join(',') : '',
-            airingState: el.anime_airing_status,
+            airingState: el.node.status,
           }),
         );
       }

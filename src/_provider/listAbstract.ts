@@ -6,6 +6,39 @@ import { errorMessage as _errorMessage } from './Errors';
 
 Object.seal(emitter);
 
+export type AiringStatus = 'airing' | 'aired' | 'not_yet_aired';
+
+export function normalizeAiringStatus(status?: number | string | null): AiringStatus | undefined {
+  if (!status) return undefined;
+
+  const normalized = status
+    .toString()
+    .toLowerCase()
+    .replace(/[\s-]+/g, '_');
+
+  if (normalized === '1') return 'airing';
+  if (normalized === '2') return 'aired';
+  if (normalized === '3') return 'not_yet_aired';
+
+  if (['currently_airing', 'current', 'ongoing', 'releasing'].includes(normalized)) {
+    return 'airing';
+  }
+
+  if (['finished_airing', 'finished', 'released', 'completed'].includes(normalized)) {
+    return 'aired';
+  }
+
+  if (
+    ['not_yet_aired', 'not_yet_released', 'upcoming', 'unreleased', 'tba', 'anons'].includes(
+      normalized,
+    )
+  ) {
+    return 'not_yet_aired';
+  }
+
+  return undefined;
+}
+
 export interface listElement {
   uid: number | string;
   malId: number | null;

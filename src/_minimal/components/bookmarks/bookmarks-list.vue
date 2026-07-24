@@ -3,13 +3,17 @@
     <div class="img">
       <ImageLazy :src="item.image" />
     </div>
-    <div class="text-side" :class="{ hasTop: item.streamUrl || item.progressText }">
-      <div v-if="item.streamUrl || item.progressText" class="top-text">
+    <div
+      class="text-side"
+      :class="{ hasTop: item.streamUrl || item.progressText || item.airingStatus }"
+    >
+      <div v-if="item.streamUrl || item.progressText || item.airingStatus" class="top-text">
         <MediaLink v-if="item.streamUrl" :href="item.streamUrl" class="stream">
           <TextIcon :src="item.streamIcon">
             <span class="stream-text">{{ lang(`overview_Continue_${item.type}`) }} <Arrow /></span>
           </TextIcon>
         </MediaLink>
+        <BookmarksAiringChip :status="item.airingStatus" />
         <div v-if="item.progress?.progress()?.getAuto()" class="time" :title="item.progressText">
           {{ item.progress.progress()!.getAuto() }}
         </div>
@@ -58,6 +62,7 @@ import TextCutoff from '../text-cutoff.vue';
 import DynamicFont from '../dynamic-font.vue';
 import Arrow from '../arrow.vue';
 import MediaProgressPill from '../media/media-progress-pill.vue';
+import BookmarksAiringChip from './bookmarks-airing-chip.vue';
 
 defineProps({
   item: {
