@@ -46,6 +46,10 @@ function checkFill(minimalObj: Minimal, home = false) {
     con.m('tabs').log(tabs);
     tabs.forEach(el => {
       chrome.tabs.sendMessage(el.id!, { action: 'TabMalUrl' }, response => {
+        if (chrome.runtime.lastError) {
+          con.m('tabs').log('No MALSync context in active tab', chrome.runtime.lastError.message);
+          return;
+        }
         if (response && response.url) {
           con.log('Fill', response);
           minimalObj.fill(response, home);
