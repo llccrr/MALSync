@@ -18,6 +18,12 @@ const appTarget = process.env.APP_TARGET || 'general';
 console.log('Mode', mode);
 console.log('appTarget', appTarget);
 
+const getManifestVersion = version => {
+  const match = version.match(/^(\d+)\.(\d+)\.(\d+)(?:-[a-z0-9-]+\.(\d+))?$/i);
+  if (!match) throw new Error(`Unsupported extension version: ${version}`);
+  return match.slice(1).filter(Boolean).join('.');
+};
+
 const malUrls = { myanimelist: pageUrls.myanimelist };
 const aniUrls = { anilist: pageUrls.anilist };
 const kitsuUrls = { anilist: pageUrls.kitsu };
@@ -125,7 +131,8 @@ const generateManifest = () => {
   const mani = {
     manifest_version: 3,
     name: packageJson.productName,
-    version: packageJson.version,
+    version: getManifestVersion(packageJson.version),
+    version_name: packageJson.version,
     description: '__MSG_Package_Description__',
     author: packageJson.author,
     default_locale: 'en',
