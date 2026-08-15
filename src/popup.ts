@@ -3,11 +3,18 @@ import { openMinimal } from './floatbutton/extension';
 import { isFirefox } from './utils/general';
 import { router } from './_minimal/router';
 
+function hasChromiumPopupCrash() {
+  const version = navigator.userAgent.match(/\b(?:Chrome|Chromium)\/(\d+)/i);
+  return version ? Number(version[1]) === 151 : false;
+}
+
 api.settings.init().then(() => {
   try {
     const mode = $('html').attr('mode');
     con.log('Mode', mode);
-    if (mode === 'popup' && api.settings.get('minimalWindow')) {
+    // Chromium 151 can close extension popups while they are being resized.
+    // Opening the existing minimal window avoids the browser crash.
+    if (mode === 'popup' && (api.settings.get('minimalWindow') || hasChromiumPopupCrash())) {
       openMinimal(function (response) {
         $('html').css('height', '0');
         if (!isFirefox()) {
