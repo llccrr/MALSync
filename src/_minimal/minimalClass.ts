@@ -5,7 +5,6 @@ import { status } from '../_provider/definitions';
 import { router } from './router';
 import { ProgressRelease } from '../utils/progressRelease';
 import { urlToSlug } from '../utils/slugs';
-import type { AiringStatus } from '../_provider/listAbstract';
 
 export class Minimal {
   private minimalVue;
@@ -63,6 +62,4 @@ export type bookmarkItem = {
   progressEp?: number;
   progressText?: string;
   progress?: ProgressRelease;
-  airingState?: number | string;
-  airingStatus?: AiringStatus;
 };

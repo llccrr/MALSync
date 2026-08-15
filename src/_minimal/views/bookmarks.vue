@@ -156,7 +156,6 @@ import FormButton from '../components/form/form-button.vue';
 import { urlToSlug } from '../../utils/slugs';
 import { localStore } from '../../utils/localStore';
 import { status } from '../../_provider/definitions';
-import { normalizeAiringStatus, type AiringStatus } from '../../_provider/listAbstract';
 
 const rootWindow = inject('rootWindow') as Window;
 const rootDocument = inject('rootDocument') as Document;
@@ -241,21 +240,6 @@ const list = computed(() => {
   return listRequest.data && !listRequest.loading ? listRequest.data.getTemplist() : null;
 });
 
-function getAiringStatus(item: bookmarkItem): AiringStatus | undefined {
-  if (item.type !== 'anime') return undefined;
-
-  const providerStatus = normalizeAiringStatus(item.airingState);
-  if (providerStatus) return providerStatus;
-
-  if (!item.progress) return undefined;
-  if (item.progress.isFinished()) return 'aired';
-  if (item.progress.progress()?.getAuto() || item.progress.progress()?.getCurrentEpisode()) {
-    return 'airing';
-  }
-
-  return undefined;
-}
-
 const formatItem = (item: listElement): bookmarkItem => {
   const resItem = item as bookmarkItem;
   if (item.options) {
@@ -282,7 +266,6 @@ const formatItem = (item: listElement): bookmarkItem => {
     resItem.progressEp = progressEp;
     resItem.progress = progressEl;
   }
-  resItem.airingStatus = getAiringStatus(resItem);
   return resItem;
 };
 
