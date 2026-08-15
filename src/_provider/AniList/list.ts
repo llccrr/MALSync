@@ -226,7 +226,7 @@ export class UserList extends ListAbstract {
           imageLarge: helper.imgCheck(el.media.coverImage.extraLarge),
           imageBanner: helper.imgCheck(el.media.bannerImage),
           tags: el.notes,
-          airingState: el.anime_airing_status,
+          airingState: el.media.status,
         });
       } else {
         tempData = await this.fn({
@@ -250,7 +250,7 @@ export class UserList extends ListAbstract {
           imageLarge: helper.imgCheck(el.media.coverImage.extraLarge),
           imageBanner: helper.imgCheck(el.media.bannerImage),
           tags: el.notes,
-          airingState: el.anime_airing_status,
+          airingState: el.media.status,
         });
       }
 

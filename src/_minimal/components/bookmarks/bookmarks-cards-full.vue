@@ -22,6 +22,7 @@
           :progress-text="item.progressText"
         />
         <MediaPillProgress :progress="item.progress" />
+        <BookmarksAiringChip :status="item.airingStatus" />
       </div>
       <div ref="text" class="bottomBox">
         <div class="title">
@@ -47,6 +48,7 @@ import MediaPillProgress from '../media/media-pill-progress.vue';
 import ImageLazy from '../image-lazy.vue';
 import MediaBar from '../media/media-bar.vue';
 import TextCutoff from '../text-cutoff.vue';
+import BookmarksAiringChip from './bookmarks-airing-chip.vue';
 
 const props = defineProps({
   item: {

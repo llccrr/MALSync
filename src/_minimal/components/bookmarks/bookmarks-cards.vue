@@ -18,6 +18,7 @@
             :show-ep="false"
           />
           <MediaPillProgress :progress="item.progress" />
+          <BookmarksAiringChip :status="item.airingStatus" />
         </div>
       </div>
       <div class="gradient-text">
@@ -57,6 +58,7 @@ import MediaPill from '../media/media-pill.vue';
 import MediaPillProgress from '../media/media-pill-progress.vue';
 import MediaProgressPill from '../media/media-progress-pill.vue';
 import TextCutoff from '../text-cutoff.vue';
+import BookmarksAiringChip from './bookmarks-airing-chip.vue';
 
 defineProps({
   item: {
