@@ -50,7 +50,6 @@ const fixtures = [
           volumes: null,
           averageScore: 79,
           coverImage: { large: 'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/b20.jpg' },
-          mediaListEntry: null,
         },
       },
     },

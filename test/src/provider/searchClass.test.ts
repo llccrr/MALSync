@@ -63,6 +63,22 @@ describe('Title Similarity', function() {
       result: false,
     },
     { title: 'Liar Liar', extTitle: 'Bonnouji', result: false },
+    {
+      title: 'Hell Mode Season 2',
+      extTitle: 'Fate/Zero 2nd Season',
+      result: false,
+    },
+    {
+      title: 'Hell Mode Season 2',
+      extTitle:
+        'Hell Mode: Yarikomi-zuki no Gamer wa Haisettei no Isekai de Musou Suru 2nd Season',
+      result: true,
+    },
+    {
+      title: 'Youjo Senki Season 2',
+      extTitle: 'Youjo Senki II',
+      result: true,
+    },
   ];
 
   titles.forEach(function(res) {

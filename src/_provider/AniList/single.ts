@@ -229,7 +229,7 @@ export class Single extends SingleAbstract {
 
         this.displayUrl = this.animeInfo.siteUrl;
         this._onList = true;
-        if (this.animeInfo.mediaListEntry === null) {
+        if (!this.animeInfo.mediaListEntry) {
           this._onList = false;
           this.animeInfo.mediaListEntry = {
             notes: '',

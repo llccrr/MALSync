@@ -179,6 +179,7 @@ export class SearchClass {
 
   protected async getCache() {
     return api.storage.get(`${this.page.name}/${this.identifier}/Search`).then(state => {
+      if (state?.similarity?.same === false) return false;
       if (state) state.cache = true;
       return state;
     });
@@ -193,10 +194,46 @@ export class SearchClass {
   }
 
   static similarity(externalTitle, title, titleArray: string[] = []) {
-    let simi = compareTwoStrings(title.toLowerCase(), externalTitle.toLowerCase());
+    const romanNumerals = {
+      i: '1',
+      ii: '2',
+      iii: '3',
+      iv: '4',
+      v: '5',
+      vi: '6',
+      vii: '7',
+      viii: '8',
+      ix: '9',
+      x: '10',
+    };
+    const normalizeTokens = (value: string) =>
+      value
+        .toLowerCase()
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\b(\d+)(st|nd|rd|th)\s+season\b/g, 'season $1')
+        .replace(/\b(i|ii|iii|iv|v|vi|vii|viii|ix|x)\b(?=\s*(?:[:-]|$))/g, numeral => {
+          return `season ${romanNumerals[numeral]}`;
+        })
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+    const titleTokens = normalizeTokens(title);
+
+    const getSimilarity = (candidate: string) => {
+      let similarity = compareTwoStrings(title.toLowerCase(), candidate.toLowerCase());
+      const candidateTokens = new Set(normalizeTokens(candidate));
+      if (titleTokens.length >= 3 && titleTokens.every(token => candidateTokens.has(token))) {
+        similarity = Math.max(similarity, 0.9);
+      }
+      return similarity;
+    };
+
+    let simi = getSimilarity(externalTitle);
     titleArray.forEach(el => {
       if (el) {
-        const tempSimi = compareTwoStrings(title.toLowerCase(), el.toLowerCase());
+        const tempSimi = getSimilarity(el);
         if (tempSimi > simi) simi = tempSimi;
       }
     });
@@ -271,6 +308,7 @@ export class SearchClass {
       }
     }
 
+    if (result && !result.similarity.same) return false;
     return result;
 
     function searchCompare(curVal, newVal, threshold = 0) {

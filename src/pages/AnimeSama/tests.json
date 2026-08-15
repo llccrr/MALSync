@@ -12,6 +12,39 @@
         "episode": 1,
         "uiSelector": false
       }
+    },
+    {
+      "url": "https://anime-sama.to/catalogue/hell-mode/saison2/vostfr/",
+      "expected": {
+        "sync": true,
+        "title": "Hell Mode Season 2",
+        "identifier": "hell-mode/saison2",
+        "overviewUrl": "https://anime-sama.to/catalogue/hell-mode",
+        "episode": 1,
+        "uiSelector": false
+      }
+    },
+    {
+      "url": "https://anime-sama.to/catalogue/one-piece/saison12/vostfr/",
+      "expected": {
+        "sync": true,
+        "title": "One Piece",
+        "identifier": "one-piece/saison12",
+        "overviewUrl": "https://anime-sama.to/catalogue/one-piece",
+        "episode": 1156,
+        "uiSelector": false
+      }
+    },
+    {
+      "url": "https://anime-sama.to/catalogue/log-horizon/saison3/vostfr/",
+      "expected": {
+        "sync": true,
+        "title": "Log Horizon Season 3",
+        "identifier": "log-horizon/saison3",
+        "overviewUrl": "https://anime-sama.to/catalogue/log-horizon",
+        "episode": 1,
+        "uiSelector": false
+      }
     }
   ]
 }
