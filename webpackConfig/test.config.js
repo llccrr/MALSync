@@ -38,7 +38,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.less'],
     alias: {
-      vue: '@vue/runtime-dom',
+      vue: require.resolve('vue/dist/vue.runtime.esm-bundler.js'),
     },
   },
   resolveLoader: {

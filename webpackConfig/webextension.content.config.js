@@ -143,7 +143,8 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.less', '.vue'],
     alias: {
-      vue: '@vue/runtime-dom',
+      // Use one absolute runtime path so app and router share the same Vue instance.
+      vue: require.resolve('vue/dist/vue.runtime.esm-bundler.js'),
     },
   },
   resolveLoader: {

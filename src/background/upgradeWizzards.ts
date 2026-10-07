@@ -1,4 +1,5 @@
 import semverGt from 'semver/functions/gt';
+import { normalizeVersion } from '../utils/version';
 
 export async function upgradewWizzards(lastVersion) {
   if (!lastVersion) throw 'No last Version';
@@ -98,7 +99,7 @@ export async function upgradewWizzards(lastVersion) {
 
   for (let i = 0; i < wizards.length; i++) {
     const wizard = wizards[i];
-    if (wizard.version === '*' || semverGt(wizard.version, lastVersion)) {
+    if (wizard.version === '*' || semverGt(wizard.version, normalizeVersion(lastVersion))) {
       logger.m(wizard.version).log(wizard.name);
 
       try {
