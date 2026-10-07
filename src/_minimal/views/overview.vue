@@ -41,6 +41,9 @@
             </span>
           </Header>
         </MediaLink>
+        <div v-if="englishTitle" class="english-title" lang="en" dir="auto">
+          {{ englishTitle }}
+        </div>
         <Modal
           v-if="
             metaRequest.data &&
@@ -256,6 +259,12 @@ const singleRequest = createRequest(parameters, async param => {
   return single;
 });
 
+const englishTitle = computed(() => {
+  const title = metaRequest.data?.englishTitle?.trim();
+  const primaryTitle = metaRequest.data?.title || singleRequest.data?.getTitle() || '';
+  return title && title.toLowerCase() !== primaryTitle.trim().toLowerCase() ? title : '';
+});
+
 watch(
   () => metaRequest.error,
   error => {
@@ -291,6 +300,14 @@ const totalLoading = computed(() => {
 <style lang="less" scoped>
 @import '../less/_globals.less';
 .overview {
+  .english-title {
+    margin-top: 4px;
+    margin-inline-start: 32px;
+    color: var(--cl-light-text);
+    font-size: var(--base-font-size);
+    overflow-wrap: anywhere;
+  }
+
   .stats {
     color: var(--cl-light-text);
     .stats-block {

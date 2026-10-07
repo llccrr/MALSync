@@ -2,6 +2,7 @@ import { Cache } from '../utils/Cache';
 
 export interface Overview {
   title: string;
+  englishTitle?: string;
   alternativeTitle: string[];
   description: string;
   image: string;
@@ -177,7 +178,7 @@ export abstract class MetaOverviewAbstract {
   getCache() {
     if (this.cacheObj) return this.cacheObj;
     this.cacheObj = new Cache(
-      `v4/${api.storage.lang('locale')}/${this.url}`,
+      `v5/${api.storage.lang('locale')}/${this.url}`,
       5 * 24 * 60 * 60 * 1000,
     );
     return this.cacheObj;

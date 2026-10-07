@@ -92,6 +92,7 @@ export class MetaOverview extends MetaOverviewAbstract {
   }
 
   private alternativeTitle(data) {
+    this.meta.englishTitle = data.en_title;
     if (typeof data.en_title !== 'undefined' && data.en_title)
       this.meta.alternativeTitle.push(data.en_title);
   }

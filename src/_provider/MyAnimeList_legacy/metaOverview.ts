@@ -110,13 +110,14 @@ export class MetaOverview extends MetaOverviewAbstract {
       const tempHtml = j.$.parseHTML(
         `<div>${data.split('<h2>Alternative Titles</h2>')[1].split('<h2>')[0]}</div>`,
       );
-      altTitle = j
-        .$(tempHtml)
-        .find('.spaceit_pad')
-        .toArray()
-        .map(function (i) {
-          return utils.getBaseText(j.$(i)).trim();
-        });
+      const titleElements = j.$(tempHtml).find('.spaceit_pad');
+      const englishTitle = titleElements.filter(function () {
+        return j.$(this).find('span').first().text().trim() === 'English:';
+      });
+      this.meta.englishTitle = utils.getBaseText(englishTitle).trim();
+      altTitle = titleElements.toArray().map(function (i) {
+        return utils.getBaseText(j.$(i)).trim();
+      });
     } catch (e) {
       console.log('[iframeOverview] Error:', e);
     }

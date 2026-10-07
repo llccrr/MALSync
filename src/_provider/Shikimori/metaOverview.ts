@@ -76,6 +76,7 @@ export class MetaOverview extends MetaOverviewAbstract {
   }
 
   private alternativeTitle(data) {
+    this.meta.englishTitle = data.meta.english?.find(title => title?.trim());
     this.meta.alternativeTitle = [
       ...(data.meta.english || []),
       ...(data.meta.japanese || []),

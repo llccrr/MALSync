@@ -237,6 +237,7 @@ export class MetaOverview extends MetaOverviewAbstract {
 
   private alternativeTitle(data) {
     const titles = data?.data?.Media?.title;
+    this.meta.englishTitle = titles?.english;
     if (titles) {
       for (const prop in titles) {
         const el = data.data.Media.title[prop];

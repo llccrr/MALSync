@@ -146,6 +146,7 @@ export class MetaOverview extends MetaOverviewAbstract {
   }
 
   private alternativeTitle(data) {
+    this.meta.englishTitle = data.alternative_titles?.en;
     if (data.alternative_titles) {
       for (const prop in data.alternative_titles) {
         const el = data.alternative_titles[prop];

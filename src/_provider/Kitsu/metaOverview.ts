@@ -128,6 +128,7 @@ export class MetaOverview extends MetaOverviewAbstract {
   }
 
   private alternativeTitle() {
+    this.meta.englishTitle = this.animeI().attributes.titles?.en;
     for (const prop in this.animeI().attributes.abbreviatedTitles) {
       const el = this.animeI().attributes.abbreviatedTitles[prop];
       if (el !== this.meta.title && el) {
